@@ -1,8 +1,14 @@
-server:
-  port: 7079
 spring:
   application:
     name: service-B
+  cloud:
+    config:
+      fail-fast: true
+      discovery:
+        enabled: true
+        service-id: config-server
+  profiles:
+    active: dev2
 eureka:
   client:
     service-url:
