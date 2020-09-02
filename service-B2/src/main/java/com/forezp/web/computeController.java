@@ -1,5 +1,6 @@
 package com.forezp.web;
 
+import com.forezp.service.ComputeService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +28,9 @@ public class computeController {
     @Autowired
     private DiscoveryClient client;
 
+    @Autowired
+    private ComputeService computeService;
+
     @RequestMapping(value = "/sub" ,method = RequestMethod.GET)
     public String sub(@RequestParam Integer a, @RequestParam Integer b) {
         List<ServiceInstance> instances = client.getInstances("service-B");
@@ -37,11 +41,12 @@ public class computeController {
         return "From Service-B, Result is " + r+"\nPort:"+instance.getPort();
     }
 
-    //call service-B
     @RequestMapping(value="/testServiceA",method=RequestMethod.GET)
     public String testServiceB(@RequestParam Integer a,@RequestParam Integer b){
-        RestTemplate restTemplate=new RestTemplate();
-        return restTemplate.getForObject("http://localhost:2222/add?a="+a+"&b="+b, String.class);
+        /*RestTemplate restTemplate=new RestTemplate();
+        return restTemplate.getForObject("http://localhost:2222/add?a="+a+"&b="+b, String.class);*/
+
+        return computeService.dealAdd(a, b);
     }
 
 
