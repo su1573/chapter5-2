@@ -1,5 +1,6 @@
 package com.forezp.web;
 
+import com.forezp.service.ConsumerService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,10 +23,15 @@ import java.util.List;
 @RestController
 public class ConsumerController {
 
+    @Autowired
+    private ConsumerService consumerService;
+
     @RequestMapping(value = "/sub" ,method = RequestMethod.GET)
     public String sub(@RequestParam Integer a, @RequestParam Integer b) {
-        RestTemplate restTemplate=new RestTemplate();
-        return restTemplate.getForObject("http://localhost:7078/sub?a="+a+"&b="+b, String.class);
+//        RestTemplate restTemplate=new RestTemplate();
+//        return restTemplate.getForObject("http://localhost:7078/sub?a="+a+"&b="+b, String.class);
+
+        return consumerService.dealSub(a, b);
     }
 
 }

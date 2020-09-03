@@ -1,18 +1,8 @@
-#原始端口
-#server:
-#  port: 2222
+server:
+  port: 8090
 spring:
   application:
-    name: service-A
-#调用chinare-cloud-config-server配置中心，从数据库中获取service-A的配置
-  cloud:
-    config:
-      label: master
-      profile: dev
-      discovery:
-        enabled: true #开启可用
-        serviceId: chinare-cloud-config-server
-
+    name: spring-boot-admin-server
 eureka:
   client:
     registryFetchIntervalSeconds: 5
@@ -33,7 +23,3 @@ management:
   endpoint:
     health:
       show-details: ALWAYS #含义是 health endpoint 是开启显示全部细节。默认情况下, /actuator/health 是公开的，并且不显示细节。
-
-
-
-

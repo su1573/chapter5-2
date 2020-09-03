@@ -1,14 +1,25 @@
 spring:
   application:
     name: service-B
+#使用本地config-server仓库配置文件  应用名-dev2
+#  cloud:
+#    config:
+#      fail-fast: true
+#      discovery:
+#        enabled: true
+#        service-id: config-server
+#  profiles:
+#    active: dev2
+
+  #调用chinare-cloud-config-server配置中心，从数据库中获取service-B2的配置
   cloud:
     config:
-      fail-fast: true
+      label: test2
+      profile: dev
       discovery:
-        enabled: true
-        service-id: config-server
-  profiles:
-    active: dev2
+        enabled: true #开启可用
+        serviceId: chinare-cloud-config-server
+
 eureka:
   client:
     service-url:
